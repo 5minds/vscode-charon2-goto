@@ -9,6 +9,7 @@
 	"categories": [
 		"Other"
 	],
+	"publisher": "5Minds",
 	"activationEvents": [
 		"onLanguage:markdown",
 		"onLanguage:typescript",
