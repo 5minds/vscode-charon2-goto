@@ -10,7 +10,7 @@ But in order to be able to publish this extension, some preparations have to be 
 
 ## Get a Personal Access Token
 
-1. Navigate to `https://dev.azure.com/process-engine`.
+1. Navigate to https://dev.azure.com/process-engine
 
 1. [Create a new personal access token](https://dev.azure.com/process-engine/_usersSettings/tokens)
 ![](res/1_Azure-Menu-PAT.png)
@@ -38,7 +38,7 @@ npm i -g vsce
 
 ## Log in to a publisher
 
-First make sure you are a member of the 5Minds publisher by navigating to `https://marketplace.visualstudio.com/manage`.
+First make sure you are a member of the 5Minds publisher by navigating to https://marketplace.visualstudio.com/manage.
 
 ![](res/6_Azure-ManagePublisher.png)
 
