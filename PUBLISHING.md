@@ -24,7 +24,7 @@ But in order to be able to publish this extension, some preparations have to be 
 1. Scroll down to `Marketplace` and select `Acquire` and `Manage`.
 ![](assets/4_PAT-NewToken-Scopes.png)
 
-1. Copy the newly created personal acess token va the copy button.
+1. Copy the newly created personal access token via the copy button.
 ![](assets/5_PAT-NewToken-CopyToken.png)
 
 ## Install vsce
