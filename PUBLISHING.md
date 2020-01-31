@@ -13,19 +13,19 @@ But in order to be able to publish this extension, some preparations have to be 
 1. Navigate to https://dev.azure.com/process-engine
 
 1. [Create a new personal access token](https://dev.azure.com/process-engine/_usersSettings/tokens)
-![](res/1_Azure-Menu-PAT.png)
+![](assets/1_Azure-Menu-PAT.png)
 
 1. Click on `New Token`.
-![](res/2_Azure-PAT-NewToken.png)
+![](assets/2_Azure-PAT-NewToken.png)
 
 1. **Select `All accessible organizations` as Organization**, enter any name and **click on `Show all scopes`**.
-![](res/3_PAT-NewToken-Main.png)
+![](assets/3_PAT-NewToken-Main.png)
 
 1. Scroll down to `Marketplace` and select `Acquire` and `Manage`.
-![](res/4_PAT-NewToken-Scopes.png)
+![](assets/4_PAT-NewToken-Scopes.png)
 
 1. Copy the newly created personal acess token va the copy button.
-![](res/5_PAT-NewToken-CopyToken.png)
+![](assets/5_PAT-NewToken-CopyToken.png)
 
 ## Install vsce
 
@@ -40,7 +40,7 @@ npm i -g vsce
 
 First make sure you are a member of the 5Minds publisher by navigating to https://marketplace.visualstudio.com/manage.
 
-![](res/6_Azure-ManagePublisher.png)
+![](assets/6_Azure-ManagePublisher.png)
 
 Run the following command and enter the previously created personal access token when prompted.
 
