@@ -23,6 +23,8 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
+		"build": "vsce package",
+		"publish": "vsce publish",
 		"pretest": "npm run compile",
 		"test": "node ./out/test/runTest.js"
 	},
