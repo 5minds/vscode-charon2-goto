@@ -1,6 +1,7 @@
 # Publishing
 
 Publishing this package is as easy as executing these two commands:
+
 ```
 vsce package
 vsce publish
