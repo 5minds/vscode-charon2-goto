@@ -49,6 +49,13 @@ Run the following command and enter the previously created personal access token
 vsce login
 ```
 
-Now you are ready to publish this extension.
-
 > If you are not a member of the 5Minds publisher, please contact the ProzessPiraten team.
+
+## Publish
+
+To finally publish the extension run
+
+```
+vsce package
+vsce publish
+```
