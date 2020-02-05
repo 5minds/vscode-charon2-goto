@@ -17,11 +17,6 @@ jobs:
       with:
         node-version: 12.x
 
-    - name: Show Actor
-      run: echo $ACTOR
-      env:
-        ACTOR: ${{ github.actor }}
-
     - name: Install npm Dependencies
       run: npm ci
 
