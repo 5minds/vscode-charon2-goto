@@ -20,8 +20,8 @@
 		"commands": []
 	},
 	"repository": {
-		"type" : "git",
-		"url" : "https://github.com/5minds/vscode-charon2-goto"
+		"type": "git",
+		"url": "https://github.com/5minds/vscode-charon2-goto"
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -33,7 +33,7 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@process-engine/ci_tools": "feature~fix_commit-and-tag_when_previous-tag_is_null",
+		"@process-engine/ci_tools": "2.6.0-alpha.1",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.11.7",
