@@ -53,7 +53,7 @@ vsce login
 
 ## Publish
 
-To finally publish the extension run
+To finally publish the extension execute the following two commands
 
 ```
 vsce package
