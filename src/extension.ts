@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
   const registries: AbstractDefinitionProviderMap = {
     commands: new CommandDefinitionProvider(),
     menus: new MenuDefinitionProvider(),
-    icons: new IconDefinitionProvider()
+    icons: new IconDefinitionProvider(),
   };
 
   // NOTE: For even more convenience, we could implement DefinitionProvider classes for
@@ -31,6 +31,8 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.languages.registerDefinitionProvider(['markdown', 'typescript', 'typescriptreact'], registries.commands);
   vscode.languages.registerDefinitionProvider(['markdown', 'typescript', 'typescriptreact'], registries.menus);
   vscode.languages.registerDefinitionProvider(['markdown', 'typescript', 'typescriptreact'], registries.icons);
+
+  vscode.languages.registerCompletionItemProvider(['markdown', 'typescript', 'typescriptreact'], registries.commands);
 }
 
 // this method is called when your extension is deactivated
@@ -41,16 +43,16 @@ const GLOB_SOURCES = '**/*.{ts,tsx}';
 const FINDERS = {
   commands: {
     regex: /(\.registerCommand\(\s*|\.registerInternalCommand\(\s*)((\')([^\']+)(\')|(\")([^\"]+)(\"))/gim,
-    matchIndex: 4
+    matchIndex: 4,
   },
   icons: {
     regex: /((\')([^\']+\ [^\']+)(\')|(\")([^\"]+\ [^\"]+)(\"))\:\s+(\(\s+\<svg|\<svg|(\')([^\']+)(\')|(\")([^\"]+)(\"))/gim,
-    matchIndex: 3
+    matchIndex: 3,
   },
   menus: {
     regex: /(\.registerMenu\(\s*)((\')([^\']+)(\')|(\")([^\"]+)(\"))/gim,
-    matchIndex: 4
-  }
+    matchIndex: 4,
+  },
 };
 
 function findItemDefinitionsInWorkspace(registries: AbstractDefinitionProviderMap) {
@@ -71,7 +73,7 @@ function findItemDefinitionsInFile(filename: string, registries: AbstractDefinit
     return;
   }
 
-  fs.readFile(filename, function(err, data) {
+  fs.readFile(filename, function (err, data) {
     if (err) throw err;
 
     const text = data.toString();

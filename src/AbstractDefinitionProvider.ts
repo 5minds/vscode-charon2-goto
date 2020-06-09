@@ -8,7 +8,9 @@ import {
   DefinitionLink,
   Range,
   Uri,
-  LocationLink
+  LocationLink,
+  CompletionItem,
+  CompletionItemKind,
 } from 'vscode';
 
 type ItemDefinition = {
@@ -24,18 +26,30 @@ type ItemDefinitionRegistry = {
 
 export default class AbstractDefinitionProvider implements DefinitionProvider {
   private registry: ItemDefinitionRegistry = {};
+
   private finderRegex: RegExp;
   private finderRegexMatchIndex: number;
   private finderRegexMatchIndexAlternative: number;
 
+  private completionRegex?: RegExp;
+  private completionRegexMatchIndex?: number;
+  private completionRegexMatchIndexAlternative?: number;
+
   constructor(
     finderRegex: RegExp,
     finderRegexIdentifierMatchIndex: number,
-    finderRegexIdentifierMatchIndexAlternative: number
+    finderRegexIdentifierMatchIndexAlternative: number,
+    completionRegex?: RegExp,
+    completionRegexIdentifierMatchIndex?: number,
+    completionRegexIdentifierMatchIndexAlternative?: number
   ) {
     this.finderRegex = finderRegex;
     this.finderRegexMatchIndex = finderRegexIdentifierMatchIndex;
     this.finderRegexMatchIndexAlternative = finderRegexIdentifierMatchIndexAlternative;
+
+    this.completionRegex = completionRegex;
+    this.completionRegexMatchIndex = completionRegexIdentifierMatchIndex;
+    this.completionRegexMatchIndexAlternative = completionRegexIdentifierMatchIndexAlternative;
   }
 
   clear() {
@@ -103,9 +117,59 @@ export default class AbstractDefinitionProvider implements DefinitionProvider {
       originSelectionRange: originSelectionRange,
       targetUri: uri,
       targetRange: targetRange,
-      targetSelectionRange: targetRange
+      targetSelectionRange: targetRange,
     };
 
     return [locationLink];
+  }
+
+  provideCompletionItems(document: TextDocument, position: Position) {
+    // get all text until the `position` and check if it reads `console.`
+    // and iff so then complete if `log`, `warn`, and `error`
+    // let linePrefix =
+    if (this.completionRegex == null || this.completionRegexMatchIndex == null) {
+      return [];
+    }
+
+    // const matches = linePrefix.match(this.completionRegex);
+
+    const lineUpToCursor = document.lineAt(position).text.substr(0, position.character);
+
+    // NOTE: we could also iterate over multiple defs here
+
+    const matches = lineUpToCursor.match(this.completionRegex);
+    console.log(matches);
+
+    if (matches == null) {
+      return [];
+    }
+
+    let partialItemName = matches[this.completionRegexMatchIndex];
+    if (partialItemName == null && this.completionRegexMatchIndexAlternative != null) {
+      partialItemName = matches[this.completionRegexMatchIndexAlternative];
+    }
+
+    const allItemNames = Object.keys(this.registry);
+    const candidates = allItemNames.filter((itemName: string) => itemName.startsWith(partialItemName));
+
+    const indexOfMatch = lineUpToCursor.indexOf(matches[0].toString());
+    const startOfMatch = indexOfMatch === -1 ? 0 : indexOfMatch;
+    const indexOfItemName = startOfMatch + lineUpToCursor.substr(startOfMatch).indexOf(partialItemName);
+    const startOfItemName = indexOfItemName === -1 ? 0 : indexOfItemName;
+    const endOfItemName = startOfItemName + partialItemName.length;
+
+    let insertRange;
+    if (startOfItemName !== endOfItemName) {
+      insertRange = new Range(position.line, startOfItemName, position.line, endOfItemName);
+    }
+
+    return candidates.map((itemName: string) => {
+      const itemDefinition = this.registry[itemName];
+      const completionItem = new CompletionItem(itemDefinition.itemName, CompletionItemKind.Value);
+
+      completionItem.range = insertRange;
+
+      return completionItem;
+    });
   }
 }
