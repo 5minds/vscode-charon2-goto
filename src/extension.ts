@@ -42,7 +42,7 @@ const GLOB_SOURCES = '**/*.{ts,tsx}';
 
 const FINDERS = {
   commands: {
-    regex: /(\.registerCommand\(\s*|\.registerInternalCommand\(\s*)((\')([^\']+)(\')|(\")([^\"]+)(\"))/gim,
+    regex: /(commands\.register\(\s*|\.registerWithContext\(\s*|\.registerInCommandSearch\(\s*|\.registerInCommandSearchWithContext\(\s*)((\')([^\']+)(\')|(\")([^\"]+)(\"))/gim,
     matchIndex: 4,
   },
   icons: {
