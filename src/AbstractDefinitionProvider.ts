@@ -84,7 +84,8 @@ export default class AbstractDefinitionProvider implements DefinitionProvider {
     }
 
     let itemName = matches[this.finderRegexMatchIndex];
-    if (itemName == null && this.finderRegexMatchIndexAlternative != null) {
+    const noItemNameFound = itemName == null || itemName.trim() === '';
+    if (noItemNameFound && this.finderRegexMatchIndexAlternative != null) {
       itemName = matches[this.finderRegexMatchIndexAlternative];
     }
 
